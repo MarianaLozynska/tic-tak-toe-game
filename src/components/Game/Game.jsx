@@ -2,11 +2,16 @@ import { Board } from "../Board/Board";
 import "./Game.css";
 
 export const Game = () => {
+  const cellValues = ["X", "X", "X", "O", "O", "X", "O", "X", "O"];
+  const winningCombunation = [0, 1, 2];
   return (
     <>
       <div id="game">
         <h1>Tic Tac Toe</h1>
-        <Board />
+        <Board
+          cellValues={cellValues}
+          winningCombunation={winningCombunation}
+        />
       </div>
 
       <div id="modal-overlay">

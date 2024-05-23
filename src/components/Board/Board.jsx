@@ -1,12 +1,12 @@
 import "./Board.css";
 import { Cell } from "../Cell/Cell";
-export const Board = () => {
-  const cellValues = ["X", "X", "X", "O", "O", "X", "O", "X", "O"];
-  return (
-    <div id="board">
-      {cellValues.map((cellvalue) => (
-        <Cell value={cellvalue} canHighligh={false} />
-      ))}
-    </div>
-  );
+export const Board = ({ winningCombunation, cellValues }) => {
+  const cells = cellValues.map((cellvalue, index) => {
+    const canHighligh =
+      winningCombunation && winningCombunation.indexOf(index) >= 0;
+
+    return <Cell key={index} value={cellvalue} canHighligh={canHighligh} />;
+  });
+
+  return <div id="board">{cells}</div>;
 };
