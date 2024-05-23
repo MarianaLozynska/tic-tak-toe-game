@@ -4,7 +4,7 @@ import { Game } from "./components/Game/Game";
 
 function App() {
   return (
-    <div classNameName="App">
+    <div className="App">
       <Game />
     </div>
   );

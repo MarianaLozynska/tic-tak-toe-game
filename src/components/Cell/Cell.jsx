@@ -1,6 +1,6 @@
 import "./Cell.css";
 import classNames from "classnames";
-export const Cell = ({ value, canHighligh }) => {
+export const Cell = ({ value, canHighligh, onClick }) => {
   const cellClass = classNames({
     cell: true,
     winner: canHighligh,
@@ -11,7 +11,7 @@ export const Cell = ({ value, canHighligh }) => {
   });
 
   return (
-    <button className={cellClass}>
+    <button className={cellClass} onClick={onClick}>
       <span className={cellContentClasses}>{value}</span>
     </button>
   );

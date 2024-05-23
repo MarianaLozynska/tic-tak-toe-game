@@ -1,9 +1,30 @@
+import { useState } from "react";
 import { Board } from "../Board/Board";
 import "./Game.css";
 
 export const Game = () => {
-  const cellValues = ["X", "X", "X", "O", "O", "X", "O", "X", "O"];
-  const winningCombunation = [0, 1, 2];
+  const [cellValues, setCellValues] = useState([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [xIsNext, setXIsNext] = useState(true);
+  const winningCombunation = [];
+  const isCellEmpty = (cellIndex) => cellValues[cellIndex] === "";
+  const onCellClick = (cellIndex) => {
+    if (isCellEmpty(cellIndex)) {
+      const newCellValues = [...cellValues];
+      newCellValues[cellIndex] = xIsNext ? "X" : "O";
+      setCellValues(newCellValues);
+      setXIsNext(!xIsNext);
+    }
+  };
   return (
     <>
       <div id="game">
@@ -11,6 +32,7 @@ export const Game = () => {
         <Board
           cellValues={cellValues}
           winningCombunation={winningCombunation}
+          cellClick={onCellClick}
         />
       </div>
 
