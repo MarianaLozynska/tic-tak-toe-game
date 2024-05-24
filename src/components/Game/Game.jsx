@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Board } from "../Board/Board";
+import { ResultModal } from "../ResultModal/ResultModal";
 import "./Game.css";
 
 export const Game = () => {
@@ -15,16 +16,21 @@ export const Game = () => {
     "",
   ]);
   const [xIsNext, setXIsNext] = useState(true);
+  const [isGameOver, setIsGameOver] = useState(false);
   const winningCombunation = [];
   const isCellEmpty = (cellIndex) => cellValues[cellIndex] === "";
   const onCellClick = (cellIndex) => {
     if (isCellEmpty(cellIndex)) {
       const newCellValues = [...cellValues];
+      // calculate the result
+
       newCellValues[cellIndex] = xIsNext ? "X" : "O";
       setCellValues(newCellValues);
       setXIsNext(!xIsNext);
+      setIsGameOver(true);
     }
   };
+
   return (
     <>
       <div id="game">
@@ -34,19 +40,7 @@ export const Game = () => {
           winningCombunation={winningCombunation}
           cellClick={onCellClick}
         />
-      </div>
-
-      <div id="modal-overlay">
-        <div id="game-result-modal">
-          <div id="result-container">
-            <div id="winner-container">
-              <span></span>
-            </div>
-          </div>
-          <div id="new-game-container">
-            <button id="new-game-button">Start New Game</button>
-          </div>
-        </div>
+        <ResultModal isGameOver={isGameOver} />
       </div>
     </>
   );
